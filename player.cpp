@@ -61,7 +61,7 @@ void Player::update()
 		}
 		m_animeNo += 9;
 	}
-	if (padState & PAD_INPUT_DOWN)
+	else if (padState & PAD_INPUT_DOWN)
 	{
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
@@ -69,7 +69,7 @@ void Player::update()
 		}
 		m_animeNo += 0;
 	}
-	if (padState & PAD_INPUT_LEFT)
+	else if (padState & PAD_INPUT_LEFT)
 	{
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
@@ -77,7 +77,7 @@ void Player::update()
 		}
 		m_animeNo += 3;
 	}
-	if (padState & PAD_INPUT_RIGHT)
+	else if (padState & PAD_INPUT_RIGHT)
 	{
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {

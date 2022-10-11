@@ -29,5 +29,4 @@ private:
 
 	Map m_map;
 
-	int m_mapHandle;
 };

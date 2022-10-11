@@ -24,10 +24,8 @@ SceneMain::SceneMain()
 		handle = -1;
 
 	}
-
-	m_mapHandle = -1;
-
 }
+
 SceneMain::~SceneMain()
 {
 
