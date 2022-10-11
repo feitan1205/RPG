@@ -39,7 +39,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ScreenFlip();
 
 		// escƒL[‚ğ‰Ÿ‚µ‚½‚çI—¹‚·‚é
-		if (CheckHitKey(KEY_INPUT_ESCAPE))	break;
+		//if (CheckHitKey(KEY_INPUT_ESCAPE))	break;
+		if (scene.getisGameEnd() == true)	break;
 
 		// fps‚ğ60‚ÉŒÅ’è
 		while (GetNowHiPerformanceCount() - time < 16667)

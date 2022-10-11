@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "Pad.h"
 #include "SelectMenu.h"
 
 namespace {
@@ -43,13 +44,88 @@ void SelectMenu::Item::setText(const char* text) {
 
 SelectMenu::Cursor::Cursor() {
 
+	m_itemNum = 3;
+	m_repeatDown = 0;
+	m_repeatUp = 0;
+	m_selectIndex = 0;
 
+
+	m_isGameEnd = false;
 
 }
 
 SelectMenu::Cursor::~Cursor() {
 
 
+
+}
+
+void SelectMenu::Cursor::update() {
+
+	if (Pad::isPress(PAD_INPUT_UP))
+	{
+		if (m_repeatUp <= 0) {
+
+
+
+			m_selectIndex--;
+			m_repeatUp = 8;
+			if (m_selectIndex < 0) {
+				if (Pad::isTrigger(PAD_INPUT_UP)) {
+					m_selectIndex = m_itemNum - 1;
+				}
+				else {
+					m_selectIndex = 0;
+				}
+			}
+		}
+		else {
+			m_repeatUp--;
+		}
+	}
+	else {
+		m_repeatUp = 0;
+	}
+
+
+
+	if (Pad::isPress(PAD_INPUT_DOWN)) {
+		if (m_repeatDown <= 0) {
+			m_selectIndex++;
+			m_repeatDown = 8;
+			if (m_selectIndex > m_itemNum - 1) {
+				if (Pad::isTrigger(PAD_INPUT_DOWN)) {
+					m_selectIndex = 0;
+				}
+				else {
+					m_selectIndex = m_itemNum - 1;
+				}
+			}
+		}
+		else {
+			m_repeatDown--;
+		}
+	}
+	else {
+		m_repeatDown = 0;
+	}
+
+	if (Pad::isTrigger(PAD_INPUT_1)) {
+
+		if (m_selectIndex = 2) {
+			m_isGameEnd = true;
+		}
+
+	}
+
+}
+
+void SelectMenu::Cursor::draw() {
+
+	int posX = m_menuPos.x;
+	int posY = m_menuPos.y + kMenuInterval * m_selectIndex;
+
+	DrawBox(posX, posY, posX + m_size.x, posY + m_size.y, GetColor(255, 255, 255), false);
 
 }
 
@@ -66,6 +142,7 @@ SelectMenu::~SelectMenu() {
 
 
 }
+
 
 void SelectMenu::init() {
 
@@ -86,12 +163,13 @@ void SelectMenu::end() {
 
 void SelectMenu::update() {
 
-
+	m_cursor.update();
 
 }
 
 void SelectMenu::draw() {
 
+	m_cursor.draw();
 
 	for (int i = 0; i < m_pItem.size(); i++) {
 		if (m_pItem[i]->getTextWidth() > width) {
@@ -111,11 +189,13 @@ void SelectMenu::draw() {
 
 	}
 
+
 }
 
 void SelectMenu::setupCorsor() {
 
-
+	m_cursor.setMenuPos(m_pos);
+	m_cursor.setSize(Vec2(getWindouWidth(), kMenuInterval/2));
 
 }
 
@@ -129,6 +209,21 @@ void SelectMenu::setPos(Vec2 pos) {
 
 	m_pos = pos;
 
+}
+
+int SelectMenu::getWindouWidth()
+{
+	int width = 0;
+
+	// 一番横幅の広いメニュー項目の幅をウインドウサイズにする
+	for (auto& pItem : m_pItem)
+	{
+		if (width < pItem->getTextWidth())
+		{
+			width = pItem->getTextWidth();
+		}
+	}
+	return width;
 }
 
 void SelectMenu::addItem(const char* text) {

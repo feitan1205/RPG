@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include "SelectMenu.h"
 #include <cassert>
 
 SceneManager::SceneManager()
@@ -85,6 +86,8 @@ void SceneManager::update()
 			break;
 		}
 	}
+
+	m_isGameEnd = m_title.getisGameEnd();
 }
 
 void SceneManager::draw()

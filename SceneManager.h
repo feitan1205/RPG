@@ -25,10 +25,13 @@ public:
 	void update();
 	void draw();
 
+	bool getisGameEnd() { return m_isGameEnd; }
 
 private:
 	SceneKind	m_kind;
 
 	SceneTitle	m_title;
 	SceneMain	m_main;
+
+	bool m_isGameEnd;
 };

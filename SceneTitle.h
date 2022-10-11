@@ -1,4 +1,5 @@
 #pragma once
+	
 #include "SceneBase.h"
 #include "SelectMenu.h"
 
@@ -10,6 +11,7 @@ public:
 		m_textPosY = 0;
 		m_textVecY = 0;
 		m_isEnd = false;
+		m_isGameEnd = false;
 	}
 	virtual ~SceneTitle() {}
 
@@ -21,6 +23,8 @@ public:
 	virtual void draw();
 
 	virtual bool isEnd() { return m_isEnd; }
+	virtual bool getisGameEnd() { return m_isGameEnd; }
+
 private:
 	// テキスト表示位置変更
 	int m_textPosY;
@@ -29,4 +33,5 @@ private:
 	SelectMenu m_menu;
 
 	bool m_isEnd;
+	bool m_isGameEnd;
 };
