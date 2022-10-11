@@ -158,7 +158,9 @@
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneOption.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="SelectMenu.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +171,9 @@
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="SceneMenu.h" />
+    <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="SelectMenu.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
