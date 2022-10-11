@@ -4,6 +4,8 @@
 SceneManager::SceneManager()
 {
 	m_kind = kSceneKindTitle;
+
+
 }
 SceneManager::~SceneManager()
 {

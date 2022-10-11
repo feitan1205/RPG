@@ -171,7 +171,6 @@
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="SceneOption.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="SelectMenu.h" />

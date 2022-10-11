@@ -7,6 +7,13 @@ void SceneTitle::init()
 	m_textVecY = 4;
 
 	m_isEnd = false;
+
+	m_menu.init();
+	m_menu.addItem("ゲームスタート");
+	m_menu.addItem("オプション");
+	m_menu.addItem("ゲーム終了");
+
+	m_menu.setPos(100, 100);
 }
 
 void SceneTitle::update()
@@ -33,5 +40,6 @@ void SceneTitle::update()
 
 void SceneTitle::draw()
 {
-	DrawString(0, m_textPosY, "タイトル画面", GetColor(255, 255, 255));
+	m_menu.draw();
+	//DrawString(0, m_textPosY, "タイトル画面", GetColor(255, 255, 255));
 }
