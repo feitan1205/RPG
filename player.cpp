@@ -110,6 +110,13 @@ void Player::update()
 
 }
 
+void Player::setPlayerSize() {
+
+
+	GetGraphSizeF(m_handle[1], &m_size.x, &m_size.y);
+
+}
+
 void Player::end() {
 
 	for (auto& handle : m_handle) {
@@ -122,6 +129,9 @@ void Player::end() {
 
 void Player::draw()
 {
+	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_size.x, true);
+
+
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", m_animeNo, true);
 	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
 }

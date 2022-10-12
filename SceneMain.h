@@ -25,6 +25,8 @@ private:
 
 	bool m_isMenu;
 
+	bool m_isHit;
+
 	// ƒvƒŒƒCƒ„[
 	Player m_player;
 

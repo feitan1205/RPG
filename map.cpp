@@ -2,19 +2,68 @@
 #include "map.h"
 
 
-bool CheckHit() {
+//Map::Wood::
+
+Map::Wood1::Wood1() {
 
 
 
 }
 
+Map::Wood1::~Wood1() {
+
+
+
+}
+
+void Map::Wood1::init() {
+
+	m_handle = LoadGraph("data/wood1.png");
+
+}
+
+void Map::Wood1::setPos(float x, float y) {
+
+	setPos(Vec2(x, y));
+
+}
+
+void Map::Wood1::setPos(Vec2 pos) {
+
+	m_pos = pos;
+
+}
+
+void Map::Wood1::setSize() {
+
+	GetGraphSizeF(m_handle, &m_size.x, &m_size.y);
+
+}
+
+void Map::Wood1::end() {
+
+	DeleteGraph(m_handle);
+
+}
+
+void Map::Wood1::draw(Vec2 pos) {
+
+	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle, true);
+	DrawFormatString(0, 48, GetColor(255, 255, 255), "%f", m_pos.x, true);
+
+
+}
+
+//Map::
+
 Map::Map() {
 
 	m_groundHandle = -1;
-	m_woodHandle = -1;
 
 	m_pos.x = 0;
 	m_pos.y = 0;
+
+	m_wood1.init();
 
 }
 
@@ -26,10 +75,22 @@ void Map::init() {
 
 
 	m_groundHandle = LoadGraph("data/jimen1.png");
-	m_woodHandle = LoadGraph("data/wood1.png");
 
 	m_pos.x = 0;
 	m_pos.y = 0;
+
+	m_wood1.setSize();
+}
+
+void Map::setPos(float x, float y) {
+
+	setPos(Vec2(x, y));
+
+}
+
+void Map::setPos(Vec2 pos) {
+
+	m_pos = pos;
 
 }
 
@@ -55,12 +116,18 @@ void Map::update() {
 	}
 	
 
+	m_wood1.setPos(100+ m_pos.x, 100+ m_pos.y);
+
+	m_wood1pos = m_wood1.getWood1pos();
+	m_wood1size = m_wood1.getWood1size();
+
 }
 
 void Map::end() {
 
 	DeleteGraph(m_groundHandle);
-	DeleteGraph(m_woodHandle);
+
+	m_wood1.end();
 
 }
 
@@ -72,5 +139,6 @@ void Map::draw() {
 		}
 	}
 
-	DrawGraph(static_cast<int>(m_pos.x) + 100, static_cast<int>(m_pos.y) + 100, m_woodHandle, true);
+	m_wood1.draw(m_pos);
+
 }

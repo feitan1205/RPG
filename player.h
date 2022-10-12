@@ -25,18 +25,24 @@ public:
 	// ˆ—
 	void update();
 	
+	void setPlayerSize();
+
 	void end();
 
 	// •`‰æ
 	void draw();
 
+	Vec2 getPlayerSize() { return m_size; }
 
+	Vec2 getPlayerPos() { return m_pos; }
 
 private:
 	int m_handle[12];
 
 	// •\¦ˆÊ’u
 	Vec2 m_pos;
+
+	Vec2 m_size;
 	// ˆÚ“®
 	Vec2 m_vec;
 
