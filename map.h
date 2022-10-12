@@ -12,6 +12,8 @@ public:
 
 	void update();
 
+	void end();
+
 	void draw();
 private:
 

@@ -24,8 +24,13 @@ public:
 
 	// ˆ—
 	void update();
+	
+	void end();
+
 	// •`‰æ
 	void draw();
+
+
 
 private:
 	int m_handle[12];

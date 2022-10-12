@@ -20,10 +20,11 @@ public:
 	// 毎フレームの描画
 	void draw();
 	
+	bool isMenuOpen() { return m_isMenu; }
 private:
 
-	// プレイヤーのグラフィックハンドル
-	int m_hPlayerGraphic[Player::kGraphicNum];
+	bool m_isMenu;
+
 	// プレイヤー
 	Player m_player;
 

@@ -23,21 +23,33 @@ SelectMenu::Item::~Item() {
 
 }
 
+void SelectMenu::Item::init() {
+
+	m_text = nullptr;
+
+}
+
 void SelectMenu::Item::draw(int x,int y) {
 
 	DrawString(x, y, m_text, GetColor(255, 255, 255), true);
 
 }
 
-int SelectMenu::Item::getTextWidth()
-{
-	return GetDrawStringWidth(m_text, strlen(m_text));
+void SelectMenu::Item::end() {
+
+	m_text = nullptr;
+
 }
 
 void SelectMenu::Item::setText(const char* text) {
 
 	m_text = text;
 
+}
+
+int SelectMenu::Item::getTextWidth()
+{
+	return GetDrawStringWidth(m_text, static_cast<int>(strlen(m_text)));
 }
 
 //SelectMenu::Cursor
@@ -51,6 +63,13 @@ SelectMenu::Cursor::Cursor() {
 
 
 	m_isGameEnd = false;
+	m_isGameStart = false;
+}
+
+void SelectMenu::Cursor::init() {
+
+	m_isGameEnd = false;
+	m_isGameStart = false;
 
 }
 
@@ -65,8 +84,6 @@ void SelectMenu::Cursor::update() {
 	if (Pad::isPress(PAD_INPUT_UP))
 	{
 		if (m_repeatUp <= 0) {
-
-
 
 			m_selectIndex--;
 			m_repeatUp = 8;
@@ -112,7 +129,11 @@ void SelectMenu::Cursor::update() {
 
 	if (Pad::isTrigger(PAD_INPUT_1)) {
 
-		if (m_selectIndex = 2) {
+		if (m_selectIndex == 0) {
+			m_isGameStart = true;
+		}
+
+		if (m_selectIndex == 2) {
 			m_isGameEnd = true;
 		}
 
@@ -122,10 +143,10 @@ void SelectMenu::Cursor::update() {
 
 void SelectMenu::Cursor::draw() {
 
-	int posX = m_menuPos.x;
-	int posY = m_menuPos.y + kMenuInterval * m_selectIndex;
+	int posX = static_cast<int>(m_menuPos.x);
+	int posY = static_cast<int>(m_menuPos.y) + kMenuInterval * m_selectIndex;
 
-	DrawBox(posX, posY, posX + m_size.x, posY + m_size.y, GetColor(255, 255, 255), false);
+	DrawBox(posX, posY, posX + static_cast<int>(m_size.x), posY + static_cast<int>(m_size.y), GetColor(255, 255, 255), false);
 
 }
 
@@ -151,13 +172,20 @@ void SelectMenu::init() {
 	m_pos.x = 100;
 	m_pos.y = 100;
 
-
+	m_cursor.init();
 
 }
 
 void SelectMenu::end() {
 
+	for (int i = 0; i < m_pItem.size(); i++) {
 
+		m_pItem[i]->end();
+		delete m_pItem[i];
+
+	}
+
+	m_pItem.clear();
 
 }
 
@@ -166,6 +194,7 @@ void SelectMenu::update() {
 	m_cursor.update();
 
 }
+
 
 void SelectMenu::draw() {
 
@@ -177,7 +206,7 @@ void SelectMenu::draw() {
 		}
 	}
 
-	int height = kMenuInterval * m_pItem.size();
+	int height = kMenuInterval * static_cast<int>(m_pItem.size());
 
 	DrawBox(static_cast<int>(m_pos.x)-16, static_cast<int>(m_pos.y)-16,
 		static_cast<int>(m_pos.x)+width+16, static_cast<int>(m_pos.y)+height,
@@ -195,7 +224,7 @@ void SelectMenu::draw() {
 void SelectMenu::setupCorsor() {
 
 	m_cursor.setMenuPos(m_pos);
-	m_cursor.setSize(Vec2(getWindouWidth(), kMenuInterval/2));
+	m_cursor.setSize(Vec2(static_cast<float>(getWindouWidth()), kMenuInterval/2));
 
 }
 

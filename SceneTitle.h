@@ -10,19 +10,19 @@ public:
 	{
 		m_textPosY = 0;
 		m_textVecY = 0;
-		m_isEnd = false;
+		m_isGameStart = false;
 		m_isGameEnd = false;
 	}
 	virtual ~SceneTitle() {}
 
 
 	virtual void init();
-	virtual void end() {}
+	virtual void end() { m_menu.end(); }
 
 	virtual void update();
 	virtual void draw();
 
-	virtual bool isEnd() { return m_isEnd; }
+	virtual bool isGameStart() { return m_isGameStart; }
 	virtual bool getisGameEnd() { return m_isGameEnd; }
 
 private:
@@ -32,6 +32,6 @@ private:
 
 	SelectMenu m_menu;
 
-	bool m_isEnd;
+	bool m_isGameStart;
 	bool m_isGameEnd;
 };

@@ -7,8 +7,8 @@ void SceneTitle::init()
 	m_textPosY = 0;
 	m_textVecY = 4;
 
-	m_isEnd = false;
-	m_isEnd = false;
+	m_isGameStart = false;
+	m_isGameEnd = false;
 
 	m_menu.init();
 	m_menu.addItem("ゲームスタート");
@@ -36,11 +36,7 @@ void SceneTitle::update()
 
 	m_menu.update();
 
-	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	if (padState & PAD_INPUT_1)
-	{
-		m_isEnd = true;
-	}
+	m_isGameStart = m_menu.getisGameStart();
 
 	m_isGameEnd = m_menu.getisGameEnd();
 }

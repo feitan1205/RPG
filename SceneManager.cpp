@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "SelectMenu.h"
+#include "Pad.h"
 #include <cassert>
 
 SceneManager::SceneManager()
@@ -50,16 +51,18 @@ void SceneManager::end()
 
 void SceneManager::update()
 {
+	Pad::update();
+
 	bool isEnd = false;
 	switch (m_kind)
 	{
 	case SceneManager::kSceneKindTitle:
 		m_title.update();
-		isEnd = m_title.isEnd();
+		isEnd = m_title.isGameStart();
 		break;
 	case SceneManager::kSceneKindMain:
 		m_main.update();
-		isEnd = m_main.isEnd();
+		isEnd = m_main.isMenuOpen();
 		break;
 	case SceneManager::kSceneKindNum:
 	default:

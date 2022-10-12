@@ -5,6 +5,15 @@
 
 namespace
 {
+	const char* const kPlayerGraphicFilename = "data/char.png";
+
+	constexpr int kPlayerGraphicDivX = Player::kGraphicDivX;
+	constexpr int kPlayerGraphicDivY = Player::kGraphicDivY;
+	constexpr int kPlayerGraphicNum = Player::kGraphicNum;
+
+	constexpr int kPlayerGraphicSizeX = Player::kGraphicSizeX;
+	constexpr int kPlayerGraphicSizeY = Player::kGraphicSizeY;
+
 	constexpr int kAnimeChangeFrame = 8;
 }
 
@@ -28,6 +37,9 @@ Player::~Player()
 
 void Player::init()
 {
+	LoadDivGraph(kPlayerGraphicFilename, kPlayerGraphicNum, kPlayerGraphicDivX, kPlayerGraphicDivY,
+		kPlayerGraphicSizeX, kPlayerGraphicSizeY, m_handle);
+
 	m_pos.x = Game::kScreenWidth / 2 - kGraphicSizeX / 2;
 	m_pos.y = Game::kScreenHeight / 2 - kGraphicSizeY / 2;
 	m_vec.x = 0.0f;
@@ -92,6 +104,16 @@ void Player::update()
 		else if (m_animeNo % 3 == 2) {
 			m_animeNo -= 1;
 		}
+	}
+
+}
+
+void Player::end() {
+
+	for (auto& handle : m_handle) {
+
+		DeleteGraph(handle);
+
 	}
 
 }

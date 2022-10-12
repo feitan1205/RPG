@@ -49,6 +49,12 @@ void Map::update() {
 
 }
 
+void Map::end() {
+
+	DeleteGraph(m_mapHandle);
+
+}
+
 void Map::draw() {
 
 	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_mapHandle, true);
