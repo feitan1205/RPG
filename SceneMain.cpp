@@ -6,6 +6,7 @@
 #include "Pad.h"
 
 
+
 SceneMain::SceneMain()
 {
 	m_isMenu = false;
@@ -42,6 +43,9 @@ void SceneMain::update()
 {
 	m_map.update();
 	m_player.update();
+
+	for()
+	CheckHit();
 
 	if (Pad::isTrigger(PAD_INPUT_8)) {
 		m_isMenu = true;

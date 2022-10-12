@@ -28,6 +28,8 @@ Player::Player()
 	m_animeNo = 0;
 	motion = 0;
 	m_animeFrame = 0; 
+
+	
 }
 
 Player::~Player()
@@ -120,6 +122,6 @@ void Player::end() {
 
 void Player::draw()
 {
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", m_animeNo, true);
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", m_animeNo, true);
 	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
 }

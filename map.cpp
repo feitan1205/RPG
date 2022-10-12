@@ -2,9 +2,16 @@
 #include "map.h"
 
 
+bool CheckHit() {
+
+
+
+}
+
 Map::Map() {
 
-	m_mapHandle = -1;
+	m_groundHandle = -1;
+	m_woodHandle = -1;
 
 	m_pos.x = 0;
 	m_pos.y = 0;
@@ -18,10 +25,11 @@ Map::~Map() {
 void Map::init() {
 
 
-	m_mapHandle = LoadGraph("data/map.png");
+	m_groundHandle = LoadGraph("data/jimen1.png");
+	m_woodHandle = LoadGraph("data/wood1.png");
 
-	m_pos.x = 70;
-	m_pos.y = 10;
+	m_pos.x = 0;
+	m_pos.y = 0;
 
 }
 
@@ -51,12 +59,18 @@ void Map::update() {
 
 void Map::end() {
 
-	DeleteGraph(m_mapHandle);
+	DeleteGraph(m_groundHandle);
+	DeleteGraph(m_woodHandle);
 
 }
 
 void Map::draw() {
 
-	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_mapHandle, true);
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 10; j++) {
+			DrawGraph(static_cast<int>(m_pos.x) + j * 64, static_cast<int>(m_pos.y) + i * 64, m_groundHandle, true);
+		}
+	}
 
+	DrawGraph(static_cast<int>(m_pos.x) + 100, static_cast<int>(m_pos.y) + 100, m_woodHandle, true);
 }
