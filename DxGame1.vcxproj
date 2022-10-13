@@ -154,6 +154,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
+    <ClCompile Include="ObjectRoad1.cpp" />
     <ClCompile Include="ObjectWood1.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="player.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="ObjectRoad1.h" />
     <ClInclude Include="ObjectWood1.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="player.h" />

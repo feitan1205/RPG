@@ -5,6 +5,7 @@
 #include "player.h"
 #include "map.h"
 #include "ObjectWood1.h"
+#include "ObjectRoad1.h"
 
 class SceneMain: public SceneBase
 {
@@ -25,6 +26,7 @@ public:
 	bool isMenuOpen() { return m_isMenu; }
 
 	void addWood1(int x,int y);
+	void addRoad1(int x, int y);
 
 private:
 
@@ -38,5 +40,7 @@ private:
 	Map m_map;
 
 	std::vector<ObjectWood1*> m_pWood1;
+	std::vector<ObjectRoad1*> m_pRoad1;
+
 
 };

@@ -51,8 +51,15 @@ SceneMain::~SceneMain()
 void SceneMain::init()
 {
 
-	addWood1(100, 100);
-	addWood1(200, 100);
+	addWood1(0, 0);
+	addWood1(60, 0);
+	addWood1(120, 0);
+	addWood1(180, 0);
+	addWood1(240, 0);
+
+	for (int i = 0; i < 8; i++) {
+		addRoad1(i * 30, 200);
+	}
 
 	m_isMenu = false;
 
@@ -62,6 +69,10 @@ void SceneMain::init()
 		m_pWood1[i]->init();
 		m_pWood1[i]->setSize();
 		m_pWood1[i]->setHitBox();
+	}
+
+	for (int i = 0; i < m_pRoad1.size(); i++) {
+		m_pRoad1[i]->init();
 	}
 
 	m_player.init();
@@ -83,7 +94,13 @@ void SceneMain::end()
 		delete m_pWood1[i];
 	}
 
+	for (int i = 0; i < m_pRoad1.size(); i++) {
+		m_pRoad1[i]->end();
+		delete m_pRoad1[i];
+	}
+
 	m_pWood1.clear();
+	m_pRoad1.clear();
 
 }
 
@@ -95,6 +112,10 @@ void SceneMain::update()
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		m_pWood1[i]->update();
 		m_pWood1[i]->setHitBox();
+	}
+
+	for (int i = 0; i < m_pRoad1.size(); i++) {
+		m_pRoad1[i]->update();
 	}
 
 	m_player.update();
@@ -114,6 +135,9 @@ void SceneMain::update()
 
 		for (int i = 0; i < m_pWood1.size(); i++) {
 			m_pWood1[i]->back();
+		}
+		for (int i = 0; i < m_pRoad1.size(); i++) {
+			m_pRoad1[i]->back();
 		}
 		m_map.back();
 		//DrawFormatString(0, 0, GetColor(255, 0, 0), "E", true);
@@ -135,6 +159,10 @@ void SceneMain::draw()
 		if (m_player.getMinHitBox().y >= m_pWood1[i]->getMaxHitBox().y)		m_pWood1[i]->draw();
 	}
 	
+	for (int i = 0; i < m_pRoad1.size(); i++) {
+		m_pRoad1[i]->draw();
+	}
+
 	m_player.draw();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
@@ -154,5 +182,13 @@ void SceneMain::addWood1(int x,int y) {
 	ObjectWood1* pWood1 = new ObjectWood1;
 	pWood1->setPos(x, y);
 	m_pWood1.push_back(pWood1);
+
+}
+
+void SceneMain::addRoad1(int x, int y) {
+
+	ObjectRoad1* pRoad1 = new ObjectRoad1;
+	pRoad1->setPos(x, y);
+	m_pRoad1.push_back(pRoad1);
 
 }
