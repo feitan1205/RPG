@@ -73,8 +73,9 @@ void SceneMain::update()
 	
 	if (m_isHit) {
 
-		//m_map.setPos(100, 100);
-		DrawFormatString(0, 0, GetColor(255, 0, 0), "E", true);
+		m_wood1.back();
+		m_map.back();
+		//DrawFormatString(0, 0, GetColor(255, 0, 0), "E", true);
 
 	}
 
@@ -88,8 +89,14 @@ void SceneMain::update()
 void SceneMain::draw()
 {
 	m_map.draw();
-	m_wood1.draw();
-	m_player.draw();
+	if (m_player.getMinHitBox().y > m_wood1.getMaxHitBox().y) {
+		m_wood1.draw();
+		m_player.draw();
+	}
+	else {
+		m_player.draw();
+		m_wood1.draw();
+	}
 	DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_wood1.getMaxHitBox().y, true);
 	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMinHitBox().y, true);
 

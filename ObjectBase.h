@@ -13,10 +13,13 @@ public:
 	virtual void end() {}
 
 	virtual void update();
+	virtual void back();
 	virtual void draw() {}
 
 protected:
 
 	Vec2 m_pos;
+
+	Vec2 m_lastPos;
 
 };

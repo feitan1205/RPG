@@ -41,6 +41,8 @@ void Map::setPos(Vec2 pos) {
 
 void Map::update() {
 
+	m_lastPos = m_pos;
+
 	// パッド(もしくはキーボード)からの入力を取得する
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	if (padState & PAD_INPUT_UP)
@@ -60,6 +62,12 @@ void Map::update() {
 		m_pos.x--;
 	}
 	
+
+}
+
+void Map::back() {
+
+	m_pos = m_lastPos;
 
 }
 

@@ -14,6 +14,7 @@ public:
 	void setPos(Vec2 pos);
 
 	void update();
+	void back();
 
 	void end();
 
@@ -21,6 +22,8 @@ public:
 
 
 protected:
+
+	Vec2 m_lastPos;
 
 	Vec2 m_pos;
 
