@@ -122,7 +122,7 @@ void Player::setHitBox() {
 	minHitBox.x = m_pos.x + (m_size.x / 8);
 	minHitBox.y = m_pos.y + ((m_size.x / 4) * 3);
 	maxHitBox.x = m_pos.x + ((m_size.x / 8) * 7);
-	maxHitBox.y = m_pos.y + (m_size.y);
+	maxHitBox.y = m_pos.y + ((m_size.y / 7) * 6);
 
 }
 

@@ -25,6 +25,8 @@ void Map::init() {
 	m_pos.x = 0;
 	m_pos.y = 0;
 
+	setMapSize();
+
 }
 
 void Map::setPos(float x, float y) {
@@ -36,6 +38,12 @@ void Map::setPos(float x, float y) {
 void Map::setPos(Vec2 pos) {
 
 	m_pos = pos;
+
+}
+
+void Map::setMapSize() {
+
+	m_minMapSize = m_pos;	
 
 }
 
@@ -61,6 +69,9 @@ void Map::update() {
 	{
 		m_pos.x--;
 	}
+
+	m_maxMapSize.x = (static_cast<float>(kGroundNumX) * 64) + m_pos.x;
+	m_maxMapSize.y = (static_cast<float>(kGroundNumY) * 64) + m_pos.y;
 	
 
 }
@@ -80,8 +91,8 @@ void Map::end() {
 
 void Map::draw() {
 
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 10; j++) {
+	for (int i = 0; i < kGroundNumY; i++) {
+		for (int j = 0; j < kGroundNumX; j++) {
 			DrawGraph(static_cast<int>(m_pos.x) + j * 64, static_cast<int>(m_pos.y) + i * 64, m_groundHandle, true);
 		}
 	}

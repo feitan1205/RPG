@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "SceneBase.h"
 #include "player.h"
 #include "map.h"
@@ -22,6 +23,9 @@ public:
 	void draw();
 	
 	bool isMenuOpen() { return m_isMenu; }
+
+	void addWood1(int x,int y);
+
 private:
 
 	bool m_isMenu;
@@ -33,6 +37,6 @@ private:
 
 	Map m_map;
 
-	ObjectWood1 m_wood1;
+	std::vector<ObjectWood1*> m_pWood1;
 
 };
