@@ -3,6 +3,7 @@
 #include "SceneBase.h"
 #include "player.h"
 #include "map.h"
+#include "ObjectWood1.h"
 
 class SceneMain: public SceneBase
 {
@@ -31,5 +32,7 @@ private:
 	Player m_player;
 
 	Map m_map;
+
+	ObjectWood1 m_wood1;
 
 };

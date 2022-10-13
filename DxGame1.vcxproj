@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="ObjectBase.cpp" />
+    <ClCompile Include="ObjectWood1.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="SceneBase.cpp" />
@@ -166,6 +168,8 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="ObjectWood1.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="SceneBase.h" />

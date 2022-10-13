@@ -129,7 +129,9 @@ void Player::end() {
 
 void Player::draw()
 {
-	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_size.x, true);
+	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_pos.x, true);
+
+
 
 
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", m_animeNo, true);

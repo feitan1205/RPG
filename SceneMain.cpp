@@ -5,13 +5,17 @@
 #include "map.h"
 #include "Pad.h"
 #include "Vec2.h"
+#include "ObjectBase.h"
+#include "ObjectWood1.h"
 
 bool CheckHit(Vec2 playerPos,Vec2 playerSize,Vec2 objectPos,Vec2 objectSize) {
 
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", objectPos.y + objectSize.y, true);
+	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", (objectPos.y + objectSize.y), true);
+	//DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", (playerPos.y + (playerSize.y / 2)), true);
 
-	if ((playerPos.y + (playerPos.y / 2)) > (objectPos.y + objectSize.y))	return false;
-	if ((playerPos.y + playerPos.y) < (objectPos.y + (objectSize.y / 2)))	return false;
+
+	if ((playerPos.y + (playerSize.y / 2)) > (objectPos.y + objectSize.y))		return false;
+	if ((playerPos.y + playerSize.y) < (objectPos.y + objectSize.y))		return false;
 	if (playerPos.x > objectPos.x + objectSize.x)							return false;
 	if (playerPos.x + playerSize.x < objectPos.x)							return false;
 
@@ -36,6 +40,9 @@ void SceneMain::init()
 	m_isMenu = false;
 
 	m_map.init();
+	m_wood1.init();
+	m_wood1.setSize();
+	m_wood1.setPos(200,200);
 	m_player.init();
 
 	m_player.setPlayerSize();
@@ -47,7 +54,7 @@ void SceneMain::end()
 {
 
 	m_player.end();
-
+	m_wood1.end();
 	m_map.end();
 
 }
@@ -56,17 +63,18 @@ void SceneMain::end()
 void SceneMain::update()
 {
 	m_map.update();
+	m_wood1.update();
 	m_player.update();
 
-	DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_player.getPlayerPos(), true);
 
 
 	//for()
-	m_isHit = CheckHit(m_player.getPlayerPos(), m_player.getPlayerSize(),m_map.getWood1pos(),m_map.getWood1size());
-
+	m_isHit = CheckHit(m_player.getPlayerPos(), m_player.getPlayerSize(),m_wood1.getWood1pos(), m_wood1.getWood1size());
+	
 	if (m_isHit) {
 
-		m_map.setPos(100, 100);
+		//m_map.setPos(100, 100);
+		DrawFormatString(0, 0, GetColor(255, 0, 0), "E", true);
 
 	}
 
@@ -80,5 +88,8 @@ void SceneMain::update()
 void SceneMain::draw()
 {
 	m_map.draw();
+	m_wood1.draw();
 	m_player.draw();
+	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", (m_wood1.getWood1pos().y + m_wood1.getWood1size().y), true);
+
 }
