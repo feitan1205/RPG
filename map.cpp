@@ -69,7 +69,8 @@ void Map::update() {
 	{
 		m_pos.x--;
 	}
-
+	m_minMapSize.x = m_pos.x;
+	m_minMapSize.y = m_pos.y;
 	m_maxMapSize.x = (static_cast<float>(kGroundNumX) * 64) + m_pos.x;
 	m_maxMapSize.y = (static_cast<float>(kGroundNumY) * 64) + m_pos.y;
 	

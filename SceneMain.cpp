@@ -21,6 +21,21 @@ bool CheckHit(Vec2 playerMinHitBox,Vec2 playerMaxHitBox,Vec2 objectMinHitBox,Vec
 
 }
 
+bool CheckOutMap(Vec2 playerMinHitBox, Vec2 playerMaxHitBox, Vec2 minMapSize, Vec2 maxMapSize) {
+
+	bool OutMap = false;
+
+	if (playerMinHitBox.y < minMapSize.y)		OutMap = true;
+	if (playerMaxHitBox.y > maxMapSize.y)		OutMap = true;
+	if (playerMinHitBox.x < minMapSize.x)		OutMap = true;
+	if (playerMaxHitBox.x > maxMapSize.x)		OutMap = true;
+	
+	return OutMap;
+
+
+	//return false;
+}
+
 SceneMain::SceneMain()
 {
 	m_isMenu = false;
@@ -59,11 +74,16 @@ void SceneMain::init()
 void SceneMain::end()
 {
 
+	m_map.end();
+
 	m_player.end();
+
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		m_pWood1[i]->end();
+		delete m_pWood1[i];
 	}
-	m_map.end();
+
+	m_pWood1.clear();
 
 }
 
@@ -86,9 +106,9 @@ void SceneMain::update()
 		if (m_isHit)		break;
 	}
 
-	/*if(!m_isHit){
-		m_isHit = CheckHit(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_map.getMaxMapSize(), m_map.getMinMapSize());
-	}*/
+	if(!m_isHit){
+		m_isHit = CheckOutMap(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_map.getMinMapSize(), m_map.getMaxMapSize());
+	}
 
 	if (m_isHit) {
 
@@ -123,8 +143,8 @@ void SceneMain::draw()
 
 
 
-	DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_map.getMaxMapSize().x, true);
-	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMaxHitBox().x, true);
+	DrawFormatString(0, 16, GetColor(255, 255, 255), "%d", m_pWood1.size(), true);
+	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMaxHitBox().y, true);
 
 
 }
