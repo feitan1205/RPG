@@ -117,6 +117,15 @@ void Player::setPlayerSize() {
 
 }
 
+void Player::setHitBox() {
+
+	minHitBox.x = m_pos.x + (m_size.x / 8);
+	minHitBox.y = m_pos.y + ((m_size.x / 4) * 3);
+	maxHitBox.x = m_pos.x + ((m_size.x / 8) * 7);
+	maxHitBox.y = m_pos.y + (m_size.y);
+
+}
+
 void Player::end() {
 
 	for (auto& handle : m_handle) {
@@ -129,11 +138,5 @@ void Player::end() {
 
 void Player::draw()
 {
-	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_pos.x, true);
-
-
-
-
-	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", m_animeNo, true);
 	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
 }

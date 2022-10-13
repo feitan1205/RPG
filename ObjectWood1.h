@@ -17,15 +17,20 @@ public:
 	void setPos(float x, float y);
 	void setPos(Vec2 pos);
 	void setSize();
+	void setHitBox();
 
 	void draw();
 
-	Vec2 getWood1pos() { return m_pos; }
-	Vec2 getWood1size() { return m_size; }
+	Vec2 getMinHitBox() { return minHitBox; }
+	Vec2 getMaxHitBox() { return maxHitBox; }
 
 private:
 
 	Vec2 m_size;
+
+	Vec2 minHitBox;
+
+	Vec2 maxHitBox;
 
 	int m_handle;
 

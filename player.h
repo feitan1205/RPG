@@ -27,14 +27,16 @@ public:
 	
 	void setPlayerSize();
 
+	void setHitBox();
+
 	void end();
 
 	// •`‰æ
 	void draw();
 
-	Vec2 getPlayerSize() { return m_size; }
 
-	Vec2 getPlayerPos() { return m_pos; }
+	Vec2 getMinHitBox() { return minHitBox; }
+	Vec2 getMaxHitBox() { return maxHitBox; }
 
 private:
 	int m_handle[12];
@@ -45,6 +47,10 @@ private:
 	Vec2 m_size;
 	// ˆÚ“®
 	Vec2 m_vec;
+
+	Vec2 minHitBox;
+
+	Vec2 maxHitBox;
 
 	int m_animeNo;
 

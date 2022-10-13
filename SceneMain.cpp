@@ -8,16 +8,13 @@
 #include "ObjectBase.h"
 #include "ObjectWood1.h"
 
-bool CheckHit(Vec2 playerPos,Vec2 playerSize,Vec2 objectPos,Vec2 objectSize) {
-
-	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", (objectPos.y + objectSize.y), true);
-	//DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", (playerPos.y + (playerSize.y / 2)), true);
+bool CheckHit(Vec2 playerMinHitBox,Vec2 playerMaxHitBox,Vec2 objectMinHitBox,Vec2 objectMaxHitBox) {
 
 
-	if ((playerPos.y + (playerSize.y / 2)) > (objectPos.y + objectSize.y))		return false;
-	if ((playerPos.y + playerSize.y) < (objectPos.y + objectSize.y))		return false;
-	if (playerPos.x > objectPos.x + objectSize.x)							return false;
-	if (playerPos.x + playerSize.x < objectPos.x)							return false;
+	if (playerMinHitBox.y > objectMaxHitBox.y)		return false;
+	if (playerMaxHitBox.y < objectMinHitBox.y)		return false;
+	if (playerMinHitBox.x > objectMaxHitBox.x)		return false;
+	if (playerMaxHitBox.x < objectMinHitBox.x)		return false;
 
 	return true;
 
@@ -43,6 +40,7 @@ void SceneMain::init()
 	m_wood1.init();
 	m_wood1.setSize();
 	m_wood1.setPos(200,200);
+	m_wood1.setHitBox();
 	m_player.init();
 
 	m_player.setPlayerSize();
@@ -66,10 +64,12 @@ void SceneMain::update()
 	m_wood1.update();
 	m_player.update();
 
+	m_wood1.setHitBox();
+	m_player.setHitBox();
 
 
 	//for()
-	m_isHit = CheckHit(m_player.getPlayerPos(), m_player.getPlayerSize(),m_wood1.getWood1pos(), m_wood1.getWood1size());
+	m_isHit = CheckHit(m_player.getMinHitBox(), m_player.getMaxHitBox(),m_wood1.getMinHitBox(), m_wood1.getMaxHitBox());
 	
 	if (m_isHit) {
 
@@ -90,6 +90,8 @@ void SceneMain::draw()
 	m_map.draw();
 	m_wood1.draw();
 	m_player.draw();
-	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", (m_wood1.getWood1pos().y + m_wood1.getWood1size().y), true);
+	DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_wood1.getMaxHitBox().y, true);
+	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMinHitBox().y, true);
+
 
 }

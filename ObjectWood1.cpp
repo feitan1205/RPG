@@ -38,6 +38,15 @@ void ObjectWood1::setSize() {
 
 }
 
+void ObjectWood1::setHitBox() {
+
+	minHitBox.x = m_pos.x + (m_size.x / 8);
+	minHitBox.y = m_pos.y + ((m_size.x / 4) * 3);
+	maxHitBox.x = m_pos.x + ((m_size.x / 8) * 7);
+	maxHitBox.y = m_pos.y + (m_size.y);
+
+}
+
 void ObjectWood1::end() {
 
 	DeleteGraph(m_handle);
@@ -47,7 +56,5 @@ void ObjectWood1::end() {
 void ObjectWood1::draw() {
 
 	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle, true);
-	//DrawFormatString(0, 48, GetColor(255, 255, 255), "%f", m_pos.x, true);
-
 
 }
