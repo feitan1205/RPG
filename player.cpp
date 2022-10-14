@@ -50,6 +50,9 @@ void Player::init()
 	m_animeNo = 1;
 	m_animeFrame = 0;
 	motion = 1;
+
+	m_status.init();
+
 }
 
 void Player::update()
@@ -107,6 +110,8 @@ void Player::update()
 			m_animeNo -= 1;
 		}
 	}
+
+
 
 }
 

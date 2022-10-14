@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec2.h"
+#include "PlayerStatus.h"
 
 class Player
 {
@@ -21,6 +22,7 @@ public:
 
 	// ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	void init();
+	void setStatus(){m_status = m_inside.getStatus() };
 
 	// ˆ—
 	void update();
@@ -51,6 +53,10 @@ private:
 	Vec2 minHitBox;
 
 	Vec2 maxHitBox;
+
+	PlayerStatus m_inside;
+
+	StatusBase m_status;
 
 	int m_animeNo;
 
