@@ -4,6 +4,7 @@
 #include "SceneBase.h"
 #include "SceneMenuWindow.h"
 #include "player.h"
+#include "Enemy1.h"
 #include "map.h"
 #include "ObjectWood1.h"
 #include "ObjectRoad1.h"
@@ -42,6 +43,8 @@ private:
 
 	// ƒvƒŒƒCƒ„[
 	Player m_player;
+
+	Enemy1 m_enemy1;
 
 	Map m_map;
 

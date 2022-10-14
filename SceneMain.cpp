@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include <cassert>
 #include <vector>
+#include "game.h"
 #include "SceneMain.h"
 #include "player.h"
 #include "map.h"
@@ -80,7 +81,14 @@ void SceneMain::init()
 
 	m_player.setPlayerSize();
 
+	m_enemy1.init();
+
+	m_enemy1.setPlayerSize();
+
 	m_menuWindow.init();
+
+	m_enemy1.setPos(static_cast<float>(GetRand(static_cast<int>(m_map.getMaxMapSize().x))), 
+		static_cast<float>(GetRand(static_cast<int>(m_map.getMaxMapSize().y))));
 
 }
 
@@ -91,6 +99,8 @@ void SceneMain::end()
 	m_map.end();
 
 	m_player.end();
+
+	m_enemy1.end();
 
 	m_menuWindow.end();
 
@@ -134,6 +144,7 @@ void SceneMain::update()
 
 	m_map.update();
 
+
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		m_pWood1[i]->update();
 		m_pWood1[i]->setHitBox();
@@ -146,6 +157,8 @@ void SceneMain::update()
 	m_player.update();
 	m_player.setHitBox();
 
+	m_enemy1.update();
+	m_enemy1.setHitBox();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		m_isHit = CheckHit(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_pWood1[i]->getMinHitBox(), m_pWood1[i]->getMaxHitBox());
@@ -189,6 +202,7 @@ void SceneMain::draw()
 	}
 
 	m_player.draw();
+	m_enemy1.draw();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		if (m_player.getMinHitBox().y < m_pWood1[i]->getMaxHitBox().y)		m_pWood1[i]->draw();
