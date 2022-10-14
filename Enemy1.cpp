@@ -47,18 +47,34 @@ void Enemy1::init()
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
 
+	vectolnum = 0;
+
 	m_animeNo = 1;
 	m_animeFrame = 0;
+	m_waitVecUpdate = 64;
 	motion = 1;
 
 	m_status.init();
 
 }
 
+void Enemy1::setVec() {
+
+	
+
+	vectolnum = GetRand(4);
+
+	if (vectolnum == 0) m_vec.y = -1;
+	if (vectolnum == 1) m_vec.y = 1;
+	if (vectolnum == 2) m_vec.x = -1;
+	if (vectolnum == 3) m_vec.x = 1;
+}
+
+
 void Enemy1::update()
 {
 
-
+	m_waitVecUpdate--;
 	m_animeFrame++;
 
 	if (m_animeFrame >= (kGraphicDivX + 1) * kAnimeChangeFrame) {
@@ -67,42 +83,55 @@ void Enemy1::update()
 
 	}
 
+	if (m_waitVecUpdate < 0) {
 
-	// パッド(もしくはキーボード)からの入力を取得する
-	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	if (padState & PAD_INPUT_UP)
+		Enemy1::setVec();
+
+		m_waitVecUpdate = 64;
+
+	}
+
+	if (vectolnum == 0)
 	{
+		m_pos += m_vec;
+
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
 			m_animeNo = 1;
 		}
 		m_animeNo += 9;
 	}
-	else if (padState & PAD_INPUT_DOWN)
+	else if (vectolnum == 1)
 	{
+		m_pos += m_vec;
+
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
 			m_animeNo = 1;
 		}
 		m_animeNo += 0;
 	}
-	else if (padState & PAD_INPUT_LEFT)
+	else if (vectolnum == 2)
 	{
+		m_pos += m_vec;
+
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
 			m_animeNo = 1;
 		}
 		m_animeNo += 3;
 	}
-	else if (padState & PAD_INPUT_RIGHT)
+	else if (vectolnum == 3)
 	{
+		m_pos += m_vec;
+
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
 			m_animeNo = 1;
 		}
 		m_animeNo += 6;
 	}
-	if (padState == 0) {
+	if (m_waitVecUpdate == 64) {
 		if (m_animeNo % 3 == 0) {
 			m_animeNo += 1;
 		}

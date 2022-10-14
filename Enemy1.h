@@ -23,6 +23,7 @@ public:
 	// ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	void init();
 	void setStatus() { m_status = m_inside.getStatus(); }
+	void setVec();
 
 	// ˆ—
 	void update();
@@ -68,4 +69,5 @@ private:
 	int m_waitVecUpdate;
 
 	int motion;
-};
+
+	int vectolnum;

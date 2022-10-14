@@ -87,8 +87,7 @@ void SceneMain::init()
 
 	m_menuWindow.init();
 
-	m_enemy1.setPos(static_cast<float>(GetRand(static_cast<int>(m_map.getMaxMapSize().x))), 
-		static_cast<float>(GetRand(static_cast<int>(m_map.getMaxMapSize().y))));
+	m_enemy1.setPos(static_cast<float>(GetRand(100) + 200), static_cast<float>(GetRand(100)));
 
 }
 
