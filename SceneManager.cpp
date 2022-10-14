@@ -91,6 +91,8 @@ void SceneManager::update()
 	}
 
 	m_isGameEnd = m_title.getisGameEnd();
+	if (m_isGameEnd)		return;
+	m_isGameEnd = m_main.getisGameEnd();
 }
 
 void SceneManager::draw()

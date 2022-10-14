@@ -58,10 +58,11 @@ void SceneMain::init()
 	addWood1(240, 0);
 
 	for (int i = 0; i < 8; i++) {
-		addRoad1(i * 30, 200);
+		addRoad1(static_cast<float>(i * 30), 200);
 	}
 
 	m_isMenu = false;
+	m_isOpenWindow = false;
 
 	m_map.init();
 
@@ -79,6 +80,8 @@ void SceneMain::init()
 
 	m_player.setPlayerSize();
 
+	m_menuWindow.init();
+
 }
 
 // I—¹ˆ—
@@ -88,6 +91,8 @@ void SceneMain::end()
 	m_map.end();
 
 	m_player.end();
+
+	m_menuWindow.end();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		m_pWood1[i]->end();
@@ -107,6 +112,26 @@ void SceneMain::end()
 // –ˆƒtƒŒ[ƒ€‚Ìˆ—
 void SceneMain::update()
 {
+	if (!m_isOpenWindow) {
+		if (Pad::isTrigger(PAD_INPUT_4)) {
+			m_isOpenWindow = true;
+		}
+	}
+	else {
+		if (Pad::isTrigger(PAD_INPUT_4)) {
+			m_isOpenWindow = false;
+		}
+	}
+
+	if (m_isOpenWindow) {
+
+		m_menuWindow.update();
+
+		m_isGameEnd = m_menuWindow.getisGameEnd();
+
+		return;
+	}
+
 	m_map.update();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
@@ -169,7 +194,11 @@ void SceneMain::draw()
 		if (m_player.getMinHitBox().y < m_pWood1[i]->getMaxHitBox().y)		m_pWood1[i]->draw();
 	}
 
+	if (m_isOpenWindow) {
 
+		m_menuWindow.draw();
+
+	}
 
 	DrawFormatString(0, 16, GetColor(255, 255, 255), "%d", m_pWood1.size(), true);
 	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMaxHitBox().y, true);
@@ -177,7 +206,7 @@ void SceneMain::draw()
 
 }
 
-void SceneMain::addWood1(int x,int y) {
+void SceneMain::addWood1(float x,float y) {
 
 	ObjectWood1* pWood1 = new ObjectWood1;
 	pWood1->setPos(x, y);
@@ -185,7 +214,7 @@ void SceneMain::addWood1(int x,int y) {
 
 }
 
-void SceneMain::addRoad1(int x, int y) {
+void SceneMain::addRoad1(float x, float y) {
 
 	ObjectRoad1* pRoad1 = new ObjectRoad1;
 	pRoad1->setPos(x, y);

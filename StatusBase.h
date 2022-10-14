@@ -4,13 +4,17 @@ class StatusBase {
 
 public:
 
-	StatusBase();
-	~StatusBase();
+	StatusBase() {
+		ATK = 0;
+		DEF = 0;
+		SPE = 0;
+	}
+	~StatusBase() {}
 
-	void init();
-	void end();
+	virtual void init() {}
+	virtual void end() {}
 
-	void update();
+	virtual void update() {}
 
 public:
 

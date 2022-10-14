@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "SceneBase.h"
+#include "SceneMenuWindow.h"
 #include "player.h"
 #include "map.h"
 #include "ObjectWood1.h"
@@ -24,9 +25,10 @@ public:
 	void draw();
 	
 	bool isMenuOpen() { return m_isMenu; }
+	bool getisGameEnd() { return m_isGameEnd; }
 
-	void addWood1(int x,int y);
-	void addRoad1(int x, int y);
+	void addWood1(float x,float y);
+	void addRoad1(float x,float y);
 
 private:
 
@@ -34,10 +36,16 @@ private:
 
 	bool m_isHit;
 
+	bool m_isOpenWindow;
+
+	bool m_isGameEnd;
+
 	// ÉvÉåÉCÉÑÅ[
 	Player m_player;
 
 	Map m_map;
+
+	SceneMenuWindow m_menuWindow;
 
 	std::vector<ObjectWood1*> m_pWood1;
 	std::vector<ObjectRoad1*> m_pRoad1;

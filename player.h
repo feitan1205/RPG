@@ -22,7 +22,7 @@ public:
 
 	// ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	void init();
-	void setStatus(){m_status = m_inside.getStatus() };
+	void setStatus() { m_status = m_inside.getStatus(); }
 
 	// ˆ—
 	void update();

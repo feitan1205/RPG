@@ -198,7 +198,6 @@ void SelectMenu::update() {
 
 void SelectMenu::draw() {
 
-	m_cursor.draw();
 
 	for (int i = 0; i < m_pItem.size(); i++) {
 		if (m_pItem[i]->getTextWidth() > width) {
@@ -207,6 +206,10 @@ void SelectMenu::draw() {
 	}
 
 	int height = kMenuInterval * static_cast<int>(m_pItem.size());
+
+	DrawBox(static_cast<int>(m_pos.x) - 16, static_cast<int>(m_pos.y) - 16,
+		static_cast<int>(m_pos.x) + width + 16, static_cast<int>(m_pos.y) + height,
+		GetColor(0, 0, 0), true);
 
 	DrawBox(static_cast<int>(m_pos.x)-16, static_cast<int>(m_pos.y)-16,
 		static_cast<int>(m_pos.x)+width+16, static_cast<int>(m_pos.y)+height,
@@ -218,6 +221,7 @@ void SelectMenu::draw() {
 
 	}
 
+	m_cursor.draw();
 
 }
 
