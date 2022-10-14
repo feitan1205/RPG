@@ -40,7 +40,8 @@ bool CheckOutMap(Vec2 playerMinHitBox, Vec2 playerMaxHitBox, Vec2 minMapSize, Ve
 SceneMain::SceneMain()
 {
 	m_isMenu = false;
-	m_isHit = false;
+	m_isPlayerHit = false;
+	m_isEnemyHit = false;
 }
 
 SceneMain::~SceneMain()
@@ -87,7 +88,7 @@ void SceneMain::init()
 
 	m_menuWindow.init();
 
-	m_enemy1.setPos(static_cast<float>(GetRand(100) + 200), static_cast<float>(GetRand(100)));
+	m_enemy1.setPos(static_cast<float>(GetRand(100) + 0), static_cast<float>(GetRand(50)));
 
 }
 
@@ -160,15 +161,30 @@ void SceneMain::update()
 	m_enemy1.setHitBox();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
-		m_isHit = CheckHit(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_pWood1[i]->getMinHitBox(), m_pWood1[i]->getMaxHitBox());
-		if (m_isHit)		break;
+		m_isPlayerHit = CheckHit(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_pWood1[i]->getMinHitBox(), m_pWood1[i]->getMaxHitBox());
+		if (m_isPlayerHit)		break;
 	}
 
-	if(!m_isHit){
-		m_isHit = CheckOutMap(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_map.getMinMapSize(), m_map.getMaxMapSize());
+	if(!m_isPlayerHit){
+		m_isPlayerHit = CheckOutMap(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_map.getMinMapSize(), m_map.getMaxMapSize());
 	}
 
-	if (m_isHit) {
+	for (int i = 0; i < m_pWood1.size(); i++) {
+		m_isEnemyHit = CheckHit(m_enemy1.getMinHitBox(), m_enemy1.getMaxHitBox(), m_pWood1[i]->getMinHitBox(), m_pWood1[i]->getMaxHitBox());
+		if (m_isEnemyHit)		break;
+	}
+
+	if (!m_isEnemyHit) {
+		m_isEnemyHit = CheckOutMap(m_enemy1.getMinHitBox(), m_enemy1.getMaxHitBox(), m_map.getMinMapSize(), m_map.getMaxMapSize());
+	}
+
+	if (!m_isEnemyHit && !m_isPlayerHit) {
+
+		m_enemy1.compBack();
+
+	}
+
+	if (m_isPlayerHit) {
 
 		for (int i = 0; i < m_pWood1.size(); i++) {
 			m_pWood1[i]->back();
@@ -178,6 +194,14 @@ void SceneMain::update()
 		}
 		m_map.back();
 		//DrawFormatString(0, 0, GetColor(255, 0, 0), "ÅE", true);
+
+	}
+
+	if (m_isEnemyHit) {
+
+		m_enemy1.back();
+		m_enemy1.compBack();
+
 
 	}
 

@@ -35,7 +35,9 @@ private:
 
 	bool m_isMenu;
 
-	bool m_isHit;
+	bool m_isPlayerHit;
+
+	bool m_isEnemyHit;
 
 	bool m_isOpenWindow;
 

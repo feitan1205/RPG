@@ -51,7 +51,7 @@ void Enemy1::init()
 
 	m_animeNo = 1;
 	m_animeFrame = 0;
-	m_waitVecUpdate = 64;
+	m_waitVecUpdate = 32;
 	motion = 1;
 
 	m_status.init();
@@ -62,7 +62,7 @@ void Enemy1::setVec() {
 
 	
 
-	vectolnum = GetRand(4);
+	vectolnum = GetRand(3);
 
 	if (vectolnum == 0) m_vec.y = -1;
 	if (vectolnum == 1) m_vec.y = 1;
@@ -86,14 +86,15 @@ void Enemy1::update()
 	if (m_waitVecUpdate < 0) {
 
 		Enemy1::setVec();
-
-		m_waitVecUpdate = 64;
+		m_waitVecUpdate = 32;
 
 	}
 
+	m_lastpos = m_pos;
+
 	if (vectolnum == 0)
 	{
-		m_pos += m_vec;
+		m_pos.y--;
 
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
@@ -103,7 +104,7 @@ void Enemy1::update()
 	}
 	else if (vectolnum == 1)
 	{
-		m_pos += m_vec;
+		m_pos.y++;
 
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
@@ -113,7 +114,7 @@ void Enemy1::update()
 	}
 	else if (vectolnum == 2)
 	{
-		m_pos += m_vec;
+		m_pos.x--;
 
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
@@ -123,7 +124,7 @@ void Enemy1::update()
 	}
 	else if (vectolnum == 3)
 	{
-		m_pos += m_vec;
+		m_pos.x++;
 
 		m_animeNo = m_animeFrame / kAnimeChangeFrame;
 		if (m_animeNo == 3) {
@@ -131,16 +132,37 @@ void Enemy1::update()
 		}
 		m_animeNo += 6;
 	}
-	if (m_waitVecUpdate == 64) {
+	/*if (m_waitVecUpdate == 1000) {
 		if (m_animeNo % 3 == 0) {
 			m_animeNo += 1;
 		}
 		else if (m_animeNo % 3 == 2) {
 			m_animeNo -= 1;
 		}
+	}*/
+
+	
+}
+
+void Enemy1::compBack() {
+
+	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	if (padState & PAD_INPUT_UP)
+	{
+		m_pos.y++;
 	}
-
-
+	else if (padState & PAD_INPUT_DOWN)
+	{
+		m_pos.y--;
+	}
+	else if (padState & PAD_INPUT_LEFT)
+	{
+		m_pos.x++;
+	}
+	else if (padState & PAD_INPUT_RIGHT)
+	{
+		m_pos.x--;
+	}
 
 }
 
@@ -171,6 +193,13 @@ void Enemy1::setHitBox() {
 	maxHitBox.y = m_pos.y + ((m_size.y / 7) * 6);
 
 }
+
+void Enemy1::back() {
+
+	m_pos = m_lastpos;
+
+}
+
 
 void Enemy1::end() {
 

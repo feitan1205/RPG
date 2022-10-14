@@ -35,6 +35,9 @@ public:
 
 	void setHitBox();
 
+	void back();
+	void compBack();
+
 	void end();
 
 	// •`‰æ
@@ -49,6 +52,7 @@ private:
 
 	// •\Ž¦ˆÊ’u
 	Vec2 m_pos;
+	Vec2 m_lastpos;
 
 	Vec2 m_size;
 	// ˆÚ“®
@@ -71,3 +75,4 @@ private:
 	int motion;
 
 	int vectolnum;
+};
