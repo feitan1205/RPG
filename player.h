@@ -51,7 +51,6 @@ private:
 	Vec2 m_vec;
 
 	Vec2 minHitBox;
-
 	Vec2 maxHitBox;
 
 	PlayerStatus m_inside;

@@ -202,6 +202,11 @@ void SceneMain::update()
 		m_enemy1.back();
 		m_enemy1.compBack();
 
+		if (m_isPlayerHit) {
+			m_enemy1.back();
+			m_enemy1.compBack();
+		}
+
 
 	}
 
