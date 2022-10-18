@@ -213,5 +213,6 @@ void Enemy1::end() {
 
 void Enemy1::draw()
 {
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", m_pos.y, true);
 	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
 }

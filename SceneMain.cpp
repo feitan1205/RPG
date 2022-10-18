@@ -194,17 +194,23 @@ void SceneMain::update()
 		}
 		m_map.back();
 		//DrawFormatString(0, 0, GetColor(255, 0, 0), "・", true);
+		//if (m_isEnemyHit) {
+
+		//	m_enemy1.back();
+		//	//m_enemy1.compBack();		
+		//}
 
 	}
 
 	if (m_isEnemyHit) {
 
-		m_enemy1.back();
-		m_enemy1.compBack();
+		DrawFormatString(0, 0, GetColor(255, 0, 0), "・", true);
 
-		if (m_isPlayerHit) {
-			m_enemy1.back();
+		m_enemy1.back();
+
+		if (!m_isPlayerHit) {
 			m_enemy1.compBack();
+			DrawFormatString(0, 0, GetColor(255, 255, 255), "・", true);
 		}
 
 
@@ -219,7 +225,7 @@ void SceneMain::update()
 // 毎フレームの描画
 void SceneMain::draw()
 {
-	m_map.draw();
+	/*m_map.draw();
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		if (m_player.getMinHitBox().y >= m_pWood1[i]->getMaxHitBox().y)		m_pWood1[i]->draw();
@@ -234,7 +240,20 @@ void SceneMain::draw()
 
 	for (int i = 0; i < m_pWood1.size(); i++) {
 		if (m_player.getMinHitBox().y < m_pWood1[i]->getMaxHitBox().y)		m_pWood1[i]->draw();
+	}*/
+
+	sortdata tbl[256];
+
+	tbl[0].type = objecttype::player;
+	tbl[0].index = 0;
+	tbl[1].type = objecttype::enemy;
+	tbl[1].index = 0;
+	for (int i = 0; i < m_pWood1.size(); i++) {
+		tbl[i + 2].type = objecttype::wood1;
+		tbl[i + 2].index = i;
 	}
+
+
 
 	if (m_isOpenWindow) {
 

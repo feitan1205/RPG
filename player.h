@@ -62,4 +62,6 @@ private:
 	int m_animeFrame;
 
 	int motion;
+
+
 };

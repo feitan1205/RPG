@@ -55,5 +55,18 @@ private:
 	std::vector<ObjectWood1*> m_pWood1;
 	std::vector<ObjectRoad1*> m_pRoad1;
 
+public:
 
+	enum class objecttype
+	{
+		player,
+		enemy,
+		wood1,
+	};
+
+	typedef struct {
+		objecttype type;
+		int index;
+	}sortdata;
+	
 };
