@@ -62,6 +62,7 @@ public:
 		player,
 		enemy,
 		wood1,
+		tmp,
 	};
 
 	typedef struct {

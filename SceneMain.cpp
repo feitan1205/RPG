@@ -225,9 +225,9 @@ void SceneMain::update()
 // ñàÉtÉåÅ[ÉÄÇÃï`âÊ
 void SceneMain::draw()
 {
-	/*m_map.draw();
+	m_map.draw();
 
-	for (int i = 0; i < m_pWood1.size(); i++) {
+	/*for (int i = 0; i < m_pWood1.size(); i++) {
 		if (m_player.getMinHitBox().y >= m_pWood1[i]->getMaxHitBox().y)		m_pWood1[i]->draw();
 	}
 	
@@ -253,7 +253,55 @@ void SceneMain::draw()
 		tbl[i + 2].index = i;
 	}
 
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", m_enemy1.getMinHitBox().y, true);
 
+	for (int i = 0; i < 2 + m_pWood1.size(); i++) {
+		float Y0;
+		if (tbl[i].type == objecttype::player) {
+			Y0 = m_player.getMinHitBox().y;
+		}
+		if (tbl[i].type == objecttype::enemy) {
+			Y0 = m_enemy1.getMinHitBox().y;
+		}
+		if (tbl[i].type == objecttype::wood1) {
+			Y0 = m_pWood1[tbl[i].index]->getMinHitBox().y;
+		}
+		for (int j = i + 1; j < 2 + m_pWood1.size(); j++) {
+			float Y1;
+			if (tbl[j].type == objecttype::player) {
+				Y1 = m_player.getMinHitBox().y;
+			}
+			if (tbl[j].type == objecttype::enemy) {
+				Y1 = m_enemy1.getMinHitBox().y;
+			}
+			if (tbl[j].type == objecttype::wood1) {
+				Y1 = m_pWood1[tbl[i].index]->getMinHitBox().y;
+			}
+			tbl[3 + m_pWood1.size()].type = objecttype::tmp;
+			tbl[3 + m_pWood1.size()].index = 0;
+
+			if (Y0 >= Y1) {
+				tbl[3 + m_pWood1.size()].type = tbl[i].type;
+				tbl[3 + m_pWood1.size()].index = tbl[i].index;
+				tbl[i].type = tbl[j].type;
+				tbl[i].index = tbl[j].index;
+				tbl[j].type = tbl[3 + m_pWood1.size()].type;
+				tbl[j].index = tbl[3 + m_pWood1.size()].index;
+			}
+		}
+	}
+
+	for (int i = 0; i < 2 + m_pWood1.size(); i++) {
+		if (tbl[i].type == objecttype::enemy) {
+			m_enemy1.draw();
+		}
+		if (tbl[i].type == objecttype::player) {
+			m_player.draw();
+		}
+		if (tbl[i].type == objecttype::wood1) {
+			m_pWood1[tbl[i].index]->draw();
+		}
+	}
 
 	if (m_isOpenWindow) {
 
