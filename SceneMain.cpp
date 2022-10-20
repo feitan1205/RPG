@@ -165,15 +165,21 @@ void SceneMain::update()
 		if (m_isPlayerHit)		break;
 	}
 
+	if (!m_isPlayerHit) {
+		m_isPlayerHit = CheckHit(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_enemy1.getMinHitBox(), m_enemy1.getMaxHitBox());
+		m_isEnemyHit = m_isPlayerHit;
+	}
+
 	if(!m_isPlayerHit){
 		m_isPlayerHit = CheckOutMap(m_player.getMinHitBox(), m_player.getMaxHitBox(), m_map.getMinMapSize(), m_map.getMaxMapSize());
 	}
 
-	for (int i = 0; i < m_pWood1.size(); i++) {
-		m_isEnemyHit = CheckHit(m_enemy1.getMinHitBox(), m_enemy1.getMaxHitBox(), m_pWood1[i]->getMinHitBox(), m_pWood1[i]->getMaxHitBox());
-		if (m_isEnemyHit)		break;
+	if (!m_isEnemyHit) {
+		for (int i = 0; i < m_pWood1.size(); i++) {
+			m_isEnemyHit = CheckHit(m_enemy1.getMinHitBox(), m_enemy1.getMaxHitBox(), m_pWood1[i]->getMinHitBox(), m_pWood1[i]->getMaxHitBox());
+			if (m_isEnemyHit)		break;
+		}
 	}
-
 	if (!m_isEnemyHit) {
 		m_isEnemyHit = CheckOutMap(m_enemy1.getMinHitBox(), m_enemy1.getMaxHitBox(), m_map.getMinMapSize(), m_map.getMaxMapSize());
 	}
@@ -193,18 +199,11 @@ void SceneMain::update()
 			m_pRoad1[i]->back();
 		}
 		m_map.back();
-		//DrawFormatString(0, 0, GetColor(255, 0, 0), "・", true);
-		//if (m_isEnemyHit) {
-
-		//	m_enemy1.back();
-		//	//m_enemy1.compBack();		
-		//}
-
 	}
 
 	if (m_isEnemyHit) {
 
-		DrawFormatString(0, 0, GetColor(255, 0, 0), "・", true);
+		//DrawFormatString(0, 0, GetColor(255, 0, 0), "・", true);
 
 		m_enemy1.back();
 
@@ -253,6 +252,8 @@ void SceneMain::draw()
 		tbl[i + 2].index = i;
 	}
 
+	DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_pWood1[0]->getMinHitBox().y, true);
+	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%f", m_player.getMinHitBox().y, true);
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", m_enemy1.getMinHitBox().y, true);
 
 	for (int i = 0; i < 2 + m_pWood1.size(); i++) {
@@ -275,7 +276,7 @@ void SceneMain::draw()
 				Y1 = m_enemy1.getMinHitBox().y;
 			}
 			if (tbl[j].type == objecttype::wood1) {
-				Y1 = m_pWood1[tbl[i].index]->getMinHitBox().y;
+				Y1 = m_pWood1[tbl[j].index]->getMinHitBox().y;
 			}
 			tbl[3 + m_pWood1.size()].type = objecttype::tmp;
 			tbl[3 + m_pWood1.size()].index = 0;
@@ -294,12 +295,15 @@ void SceneMain::draw()
 	for (int i = 0; i < 2 + m_pWood1.size(); i++) {
 		if (tbl[i].type == objecttype::enemy) {
 			m_enemy1.draw();
+			DrawFormatString(0, (i+2)*16, GetColor(255, 255, 255), "エネミー", true);
 		}
 		if (tbl[i].type == objecttype::player) {
 			m_player.draw();
+			DrawFormatString(0, (i + 2) * 16, GetColor(255, 255, 255), "プレイヤー", true);
 		}
 		if (tbl[i].type == objecttype::wood1) {
 			m_pWood1[tbl[i].index]->draw();
+			DrawFormatString(0, (i + 2) * 16, GetColor(255, 255, 255), "木", true);
 		}
 	}
 
@@ -309,8 +313,8 @@ void SceneMain::draw()
 
 	}
 
-	DrawFormatString(0, 16, GetColor(255, 255, 255), "%d", m_pWood1.size(), true);
-	DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMaxHitBox().y, true);
+	//DrawFormatString(0, 16, GetColor(255, 255, 255), "%d", m_pWood1.size(), true);
+	//DrawFormatString(0, 32, GetColor(255, 255, 255), "%f", m_player.getMaxHitBox().y, true);
 
 
 }
